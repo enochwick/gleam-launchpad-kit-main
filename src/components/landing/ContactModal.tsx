@@ -18,14 +18,50 @@ interface ContactModalProps {
 
 export const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setLoading(true);
+
+    const form = e.currentTarget;
+    const data = {
+      firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value,
+      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      organization: (form.elements.namedItem("organization") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        setError(json.error ?? "Something went wrong. Please try again.");
+      } else {
+        setSubmitted(true);
+      }
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = (val: boolean) => {
-    if (!val) setSubmitted(false);
+    if (!val) {
+      setSubmitted(false);
+      setError(null);
+    }
     onOpenChange(val);
   };
 
@@ -56,43 +92,50 @@ export const ContactModal = ({ open, onOpenChange }: ContactModalProps) => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <Label htmlFor="firstName">First name</Label>
-                <Input id="firstName" placeholder="Jane" required />
+                <Input id="firstName" name="firstName" placeholder="Jane" required />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="lastName">Last name</Label>
-                <Input id="lastName" placeholder="Doe" required />
+                <Input id="lastName" name="lastName" placeholder="Doe" required />
               </div>
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="email">Work email</Label>
-              <Input id="email" type="email" placeholder="jane@hospital.org" required />
+              <Input id="email" name="email" type="email" placeholder="jane@hospital.org" required />
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="organization">Organization</Label>
-              <Input id="organization" placeholder="Hospital / Clinic name" />
+              <Input id="organization" name="organization" placeholder="Hospital / Clinic name" />
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="phone">Phone number</Label>
-              <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+              <Input id="phone" name="phone" type="tel" placeholder="+1 (555) 000-0000" />
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="message">Message</Label>
               <Textarea
                 id="message"
+                name="message"
                 placeholder="Tell us how we can help..."
                 className="min-h-[100px] resize-none"
+                required
               />
             </div>
 
+            {error && (
+              <p className="text-sm text-red-500">{error}</p>
+            )}
+
             <Button
               type="submit"
-              className="w-full rounded-full h-11 text-sm font-semibold btn-gradient text-white border-0"
+              disabled={loading}
+              className="w-full rounded-full h-11 text-sm font-semibold btn-gradient text-white border-0 disabled:opacity-60"
             >
-              Send Message
+              {loading ? "Sending…" : "Send Message"}
             </Button>
           </form>
         )}
