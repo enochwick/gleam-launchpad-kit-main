@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DashboardMock } from "./DashboardMock";
+import { ContactModal } from "@/components/landing/ContactModal";
 
 export const Hero = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative pt-40 pb-20 overflow-hidden">
       <div className="absolute inset-0 dot-bg pointer-events-none opacity-60" />
@@ -34,7 +38,7 @@ export const Hero = () => {
             <Button className="rounded-full h-12 px-7 text-sm font-semibold btn-gradient text-white border-0">
               Schedule a Demo
             </Button>
-            <Button variant="outline" className="rounded-full h-12 px-7 text-sm font-medium bg-transparent border-foreground/15 hover:bg-foreground/5">
+            <Button onClick={() => setOpen(true)} variant="outline" className="rounded-full h-12 px-7 text-sm font-medium bg-transparent border-foreground/15 hover:bg-foreground/5">
               Contact Us
             </Button>
           </div>
@@ -50,6 +54,7 @@ export const Hero = () => {
           <DashboardMock />
         </motion.div>
       </div>
+      <ContactModal open={open} onOpenChange={setOpen} />
     </section>
   );
 };
