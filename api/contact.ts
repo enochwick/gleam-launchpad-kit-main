@@ -21,17 +21,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: "memories@socialboothco.com",
+      from: "onboarding@resend.dev",
+      // Resend requires a verified domain to send to arbitrary addresses.
+      // Using the account email (eshiutopia@gmail.com) works without domain verification.
+      // Once socialboothco.com is verified in Resend, change this to: memories@socialboothco.com
+      to: "eshiutopia@gmail.com",
+      reply_to: email,
       subject: `New contact form submission from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <table style="border-collapse:collapse;width:100%">
-          <tr><td style="padding:8px;font-weight:bold">Name</td><td style="padding:8px">${firstName} ${lastName}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold">Email</td><td style="padding:8px">${email}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold">Organization</td><td style="padding:8px">${organization || "—"}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold">Phone</td><td style="padding:8px">${phone || "—"}</td></tr>
-          <tr><td style="padding:8px;font-weight:bold;vertical-align:top">Message</td><td style="padding:8px;white-space:pre-wrap">${message}</td></tr>
+        <p><strong>Intended recipient:</strong> memories@socialboothco.com</p>
+        <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
+          <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Name</td><td style="padding:8px 12px">${firstName} ${lastName}</td></tr>
+          <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Email</td><td style="padding:8px 12px">${email}</td></tr>
+          <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Organization</td><td style="padding:8px 12px">${organization || "—"}</td></tr>
+          <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Phone</td><td style="padding:8px 12px">${phone || "—"}</td></tr>
+          <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5;vertical-align:top">Message</td><td style="padding:8px 12px;white-space:pre-wrap">${message}</td></tr>
         </table>
       `,
     });
