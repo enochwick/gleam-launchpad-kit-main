@@ -57,6 +57,7 @@ const Login = () => {
         email,
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
           data: {
             first_name: firstName.trim(),
             last_name: lastName.trim(),
