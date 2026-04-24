@@ -24,10 +24,26 @@ const Login = () => {
   );
   const [success, setSuccess] = useState<string | null>(null);
 
+  const [unconfirmed, setUnconfirmed] = useState(false);
+  const [resending, setResending] = useState(false);
+
   const switchMode = (next: Mode) => {
     setMode(next);
     setError(null);
     setSuccess(null);
+    setUnconfirmed(false);
+  };
+
+  const resendConfirmation = async () => {
+    setResending(true);
+    const { error } = await supabase.auth.resend({ type: "signup", email });
+    setResending(false);
+    if (error) {
+      setError(error.message);
+    } else {
+      setSuccess("Confirmation email resent! Check your inbox.");
+      setUnconfirmed(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -58,7 +74,12 @@ const Login = () => {
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
-        setError(error.message);
+        if (error.message.toLowerCase().includes("email not confirmed")) {
+          setError("Please confirm your email before signing in. Check your inbox for the confirmation link.");
+          setUnconfirmed(true);
+        } else {
+          setError(error.message);
+        }
       } else {
         navigate("/dashboard");
       }
@@ -160,7 +181,21 @@ const Login = () => {
               />
             </div>
 
-            {error && <p className="text-sm text-red-500">{error}</p>}
+            {error && (
+              <div className="space-y-2">
+                <p className="text-sm text-red-500">{error}</p>
+                {unconfirmed && (
+                  <button
+                    type="button"
+                    onClick={resendConfirmation}
+                    disabled={resending}
+                    className="text-sm text-primary hover:underline disabled:opacity-50"
+                  >
+                    {resending ? "Sending…" : "Resend confirmation email"}
+                  </button>
+                )}
+              </div>
+            )}
             {success && <p className="text-sm text-green-500">{success}</p>}
 
             <Button
