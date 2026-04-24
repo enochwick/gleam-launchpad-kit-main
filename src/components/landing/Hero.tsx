@@ -16,21 +16,6 @@ export const Hero = () => {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center text-center"
         >
-          {/* Logo mark */}
-          <div className="relative mb-10 inline-flex items-center justify-center">
-            <div className="absolute inset-0 -m-8 rounded-full" style={{ background: "radial-gradient(closest-side, hsl(188 95% 50% / 0.25), transparent 70%)" }} />
-            <div className="relative flex items-baseline gap-2">
-              <span className="font-display text-3xl md:text-4xl tracking-tight">
-                Healthview
-              </span>
-              <span className="relative inline-flex h-10 w-10 items-center justify-center">
-                <span className="absolute inset-0 rounded-full border border-primary/50" />
-                <span className="absolute inset-1.5 rounded-full border border-primary/70" />
-                <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-primary shadow-[0_0_10px_hsl(var(--primary))]" />
-                <span className="font-mono text-[10px] text-primary">360</span>
-              </span>
-            </div>
-          </div>
 
           <span className="pill-eyebrow mb-8">Introducing the All-New Healthview 360™</span>
 
