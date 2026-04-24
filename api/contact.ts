@@ -21,16 +21,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     await resend.emails.send({
-      from: "onboarding@resend.dev",
-      // Resend requires a verified domain to send to arbitrary addresses.
-      // Using the account email (eshiutopia@gmail.com) works without domain verification.
-      // Once socialboothco.com is verified in Resend, change this to: memories@socialboothco.com
-      to: "eshiutopia@gmail.com",
+      from: "noreply@socialboothco.com",
+      to: "memories@socialboothco.com",
       reply_to: email,
       subject: `New contact form submission from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Intended recipient:</strong> memories@socialboothco.com</p>
         <table style="border-collapse:collapse;width:100%;font-family:sans-serif">
           <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Name</td><td style="padding:8px 12px">${firstName} ${lastName}</td></tr>
           <tr><td style="padding:8px 12px;font-weight:bold;background:#f5f5f5">Email</td><td style="padding:8px 12px">${email}</td></tr>
