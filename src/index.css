@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Healthview 360 inspired — dark navy with teal/cyan glow */
+
+@layer base {
+  :root {
+    /* Force dark by default — landing is dark */
+    --background: 200 60% 4%;
+    --foreground: 180 20% 96%;
+
+    --card: 200 50% 6%;
+    --card-foreground: 180 20% 96%;
+
+    --popover: 200 50% 6%;
+    --popover-foreground: 180 20% 96%;
+
+    --primary: 188 95% 50%;
+    --primary-foreground: 200 60% 4%;
+
+    --secondary: 200 40% 10%;
+    --secondary-foreground: 180 20% 96%;
+
+    --muted: 200 30% 12%;
+    --muted-foreground: 195 15% 65%;
+
+    --accent: 188 95% 45%;
+    --accent-foreground: 200 60% 4%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 180 20% 96%;
+
+    --teal: 180 90% 45%;
+    --cyan: 188 95% 55%;
+    --blue: 210 100% 55%;
+    --warning: 38 92% 55%;
+    --success: 160 70% 45%;
+
+    --border: 195 30% 18%;
+    --border-solid: 195 30% 18%;
+    --input: 195 30% 18%;
+    --ring: 188 95% 50%;
+
+    --radius: 0.75rem;
+
+    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, hsl(188 95% 25% / 0.35), transparent 60%),
+                     radial-gradient(ellipse 60% 50% at 20% 80%, hsl(160 70% 25% / 0.25), transparent 70%),
+                     radial-gradient(ellipse 70% 50% at 85% 20%, hsl(210 100% 25% / 0.20), transparent 70%);
+    --gradient-text: linear-gradient(180deg, hsl(188 95% 60%), hsl(210 100% 55%));
+    --gradient-button: linear-gradient(135deg, hsl(210 100% 55%), hsl(188 95% 45%));
+    --shadow-glow: 0 0 60px hsl(188 95% 50% / 0.35);
+    --shadow-card: 0 20px 60px -20px hsl(200 80% 2% / 0.8);
+
+    --sidebar-background: 200 50% 6%;
+    --sidebar-foreground: 180 20% 96%;
+    --sidebar-primary: 188 95% 50%;
+    --sidebar-primary-foreground: 200 60% 4%;
+    --sidebar-accent: 200 40% 10%;
+    --sidebar-accent-foreground: 180 20% 96%;
+    --sidebar-border: 195 30% 18%;
+    --sidebar-ring: 188 95% 50%;
+  }
+
+  .dark {
+    /* Same — site is always dark */
+    --background: 200 60% 4%;
+    --foreground: 180 20% 96%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+  }
+  .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-gradient {
+    background: var(--gradient-button);
+    box-shadow: 0 8px 30px -8px hsl(188 95% 45% / 0.5), inset 0 1px 0 hsl(180 100% 80% / 0.25);
+  }
+  .btn-gradient:hover { filter: brightness(1.1); }
+
+  .glass {
+    background: hsl(200 50% 8% / 0.6);
+    backdrop-filter: blur(14px);
+    border: 1px solid hsl(195 30% 22% / 0.6);
+  }
+
+  .card-glow {
+    background: linear-gradient(180deg, hsl(200 50% 8% / 0.7), hsl(200 60% 5% / 0.7));
+    border: 1px solid hsl(195 30% 18%);
+    box-shadow: var(--shadow-card);
+  }
+
+  .dot-bg {
+    background-image: radial-gradient(hsl(188 95% 45% / 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .marquee { animation: marquee 35s linear infinite; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .pill-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-wider;
+    color: hsl(188 95% 70%);
+    border: 1px solid hsl(188 95% 45% / 0.4);
+    background: hsl(188 95% 20% / 0.15);
+  }
+  .pill-eyebrow::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: hsl(188 95% 55%);
+    box-shadow: 0 0 10px hsl(188 95% 55%);
+  }
+
+  .ring-glow { box-shadow: 0 0 0 1px hsl(188 95% 45% / 0.25), 0 0 40px hsl(188 95% 45% / 0.15); }
+}
