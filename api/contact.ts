@@ -1,7 +1,13 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -19,6 +25,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!email?.trim() || !isValidEmail(email)) return res.status(400).json({ error: "A valid work email is required." });
   if (!message?.trim()) return res.status(400).json({ error: "Message is required." });
 
+  // Save to Supabase
+  const { error: dbError } = await supabase.from("contact_submissions").insert({
+    first_name: firstName.trim(),
+    last_name: lastName.trim(),
+    email: email.trim(),
+    organization: organization?.trim() || null,
+    phone: phone?.trim() || null,
+    message: message.trim(),
+  });
+
+  if (dbError) console.error("Supabase insert error:", dbError);
+
+  // Send email via Resend
   try {
     await resend.emails.send({
       from: "noreply@socialboothco.com",
@@ -36,10 +55,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         </table>
       `,
     });
-
-    return res.status(200).json({ success: true });
   } catch (err) {
     console.error("Resend error:", err);
-    return res.status(500).json({ error: "Failed to send email. Please try again." });
+    // Still return success if DB saved — email is a secondary delivery
+    if (!dbError) return res.status(200).json({ success: true });
+    return res.status(500).json({ error: "Failed to send. Please try again." });
   }
+
+  return res.status(200).json({ success: true });
 }
