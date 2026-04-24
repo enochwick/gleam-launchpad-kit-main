@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ContactModal } from "@/components/landing/ContactModal";
 
@@ -38,6 +39,17 @@ export const Nav = () => {
               >
                 Contact
               </button>
+              <Link
+                to="/login"
+                className="hidden sm:inline text-sm text-foreground/70 hover:text-foreground transition-colors px-3"
+              >
+                Login
+              </Link>
+              <Link to="/login">
+                <Button variant="outline" className="rounded-full h-9 px-5 text-sm font-medium bg-transparent border-foreground/20 hover:bg-foreground/5">
+                  Register
+                </Button>
+              </Link>
               <Button className="rounded-full h-9 px-5 text-sm font-medium btn-gradient text-white border-0">
                 Schedule Demo
               </Button>
