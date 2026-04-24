@@ -18,9 +18,6 @@ export const Nav = () => {
               <span className="absolute inset-1 rounded-full border border-primary/60" />
               <span className="absolute bottom-0 right-0 h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]" />
             </span>
-            <span className="text-base font-semibold tracking-tight">
-              Healthview <span className="text-primary">360</span>
-            </span>
           </a>
           <nav className="hidden lg:flex items-center gap-8">
             {links.map((l) => (
