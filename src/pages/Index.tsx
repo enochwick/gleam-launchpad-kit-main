@@ -7,6 +7,7 @@ import { Features } from "@/components/landing/Features";
 import { Stakeholders } from "@/components/landing/Stakeholders";
 import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Walkthroughs } from "@/components/landing/Walkthroughs";
+import { MediaShowcase } from "@/components/landing/MediaShowcase";
 import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
 import { ChatWidget } from "@/components/chat/ChatWidget";
@@ -23,6 +24,7 @@ const Index = () => {
       <Stakeholders />
       <HowItWorks />
       <Walkthroughs />
+      <MediaShowcase />
       <CTA />
       <Footer />
       <ChatWidget />
