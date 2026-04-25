@@ -9,6 +9,7 @@ import Index from "./pages/Index.tsx";
 import Login from "./pages/Login.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
+import AdminMedia from "./pages/admin/Media.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/media"
+              element={
+                <ProtectedRoute>
+                  <AdminMedia />
                 </ProtectedRoute>
               }
             />

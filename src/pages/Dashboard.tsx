@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { ContactSubmissions } from "@/components/dashboard/ContactSubmissions";
 import { FileUpload } from "@/components/dashboard/FileUpload";
@@ -40,6 +40,12 @@ const Dashboard = () => {
           <span className="font-display text-lg font-semibold">Dashboard</span>
         </div>
         <div className="flex items-center gap-4">
+          <Link
+            to="/admin/media"
+            className="text-sm text-foreground/55 hover:text-foreground transition-colors hidden sm:block"
+          >
+            Media Library
+          </Link>
           <span className="text-sm text-foreground/50 hidden sm:block">{user?.email}</span>
           <Button
             variant="outline"
