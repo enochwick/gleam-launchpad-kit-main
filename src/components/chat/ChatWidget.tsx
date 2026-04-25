@@ -11,11 +11,13 @@ export const ChatWidget = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-6 z-[60] flex flex-col items-end gap-3">
       {/* Chat window */}
       {open && (
-        <div className="w-[340px] h-[480px] card-glow rounded-2xl flex flex-col overflow-hidden shadow-2xl"
-             style={{ background: "hsl(var(--background))" }}>
+        <div
+          className="w-[min(340px,calc(100vw-3rem))] h-[480px] card-glow rounded-2xl flex flex-col overflow-hidden shadow-2xl"
+          style={{ background: "hsl(var(--background))" }}
+        >
           {/* Header */}
           <div className="flex items-center justify-between px-4 py-3 border-b border-foreground/10">
             <div className="flex items-center gap-2">
@@ -25,8 +27,13 @@ export const ChatWidget = () => {
               </span>
               <span className="text-sm font-semibold">Ask anything</span>
             </div>
-            <button onClick={() => setOpen(false)}
-              className="text-foreground/40 hover:text-foreground transition-colors text-lg leading-none">×</button>
+            <button
+              onClick={() => setOpen(false)}
+              className="text-foreground/40 hover:text-foreground transition-colors text-lg leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded"
+              aria-label="Close chat"
+            >
+              ×
+            </button>
           </div>
 
           <ChatMessages messages={messages} loading={loading} />
@@ -45,7 +52,8 @@ export const ChatWidget = () => {
               <button
                 onClick={() => send()}
                 disabled={!input.trim() || loading}
-                className="text-primary disabled:text-foreground/20 transition-colors"
+                className="text-primary disabled:text-foreground/20 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded"
+                aria-label="Send message"
               >
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -59,7 +67,8 @@ export const ChatWidget = () => {
       {/* Toggle button */}
       <button
         onClick={() => setOpen((o) => !o)}
-        className="h-14 w-14 rounded-full btn-gradient text-white shadow-lg flex items-center justify-center hover:scale-105 transition-transform"
+        className="h-14 w-14 rounded-full btn-gradient text-white shadow-lg flex items-center justify-center hover:scale-105 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label={open ? "Close chat" : "Open chat"}
       >
         {open ? (
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

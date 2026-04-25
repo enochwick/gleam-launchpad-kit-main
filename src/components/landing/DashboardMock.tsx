@@ -69,13 +69,18 @@ export const DashboardMock = () => {
             </div>
 
             <div>
-              <h3 className="font-mono text-[10px] uppercase tracking-wider text-foreground/50 mb-3 text-center">
-                Weekly Orders
-              </h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-mono text-[10px] uppercase tracking-wider text-foreground/50">
+                  Weekly Orders
+                </h3>
+                <span className="font-mono text-xs text-primary">Total: 147</span>
+              </div>
               <div className="rounded-lg border border-border/60 bg-[hsl(22_10%_8%)] p-4">
                 <div className="flex items-end justify-between h-24 gap-2">
                   {bars.map((h, i) => (
-                    <div key={i} className="flex-1 flex flex-col items-center gap-2">
+                    <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                      {i === 3 && <span className="font-mono text-[9px] text-primary">92</span>}
+                      {i !== 3 && <span className="font-mono text-[9px] text-transparent">0</span>}
                       <div className="w-full rounded-sm bg-gradient-to-t from-primary/30 to-primary/80" style={{ height: `${h}%` }} />
                     </div>
                   ))}
