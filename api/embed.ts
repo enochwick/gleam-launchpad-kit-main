@@ -21,25 +21,36 @@ function chunkText(text: string, size = 500, overlap = 50): string[] {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const { text, source = "document", document_id } = req.body ?? {};
-  if (!text?.trim()) return res.status(400).json({ error: "text required" });
+  try {
+    const { text, source = "document", document_id } = req.body ?? {};
+    if (!text?.trim()) return res.status(400).json({ error: "text required" });
 
-  const chunks = chunkText(text);
+    const chunks = chunkText(text);
+    if (chunks.length === 0) return res.status(400).json({ error: "not enough text to embed" });
 
-  const embeddings = await openai.embeddings.create({
-    model: "text-embedding-3-small",
-    input: chunks,
-  });
+    const embeddings = await openai.embeddings.create({
+      model: "text-embedding-3-small",
+      input: chunks,
+    });
 
-  const rows = chunks.map((content, i) => ({
-    content,
-    embedding: embeddings.data[i].embedding,
-    source,
-    document_id: document_id ?? null,
-  }));
+    const rows = chunks.map((content, i) => ({
+      content,
+      embedding: embeddings.data[i].embedding,
+      source,
+      document_id: document_id ?? null,
+    }));
 
-  const { error } = await supabase.from("knowledge_chunks").insert(rows);
-  if (error) return res.status(500).json({ error: error.message });
+    if (document_id) {
+      const { error: deleteError } = await supabase.from("knowledge_chunks").delete().eq("document_id", document_id);
+      if (deleteError) return res.status(500).json({ error: deleteError.message });
+    }
 
-  return res.status(200).json({ success: true, chunks: rows.length });
+    const { error } = await supabase.from("knowledge_chunks").insert(rows);
+    if (error) return res.status(500).json({ error: error.message });
+
+    return res.status(200).json({ success: true, chunks: rows.length });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Embedding failed";
+    return res.status(500).json({ error: message });
+  }
 }
