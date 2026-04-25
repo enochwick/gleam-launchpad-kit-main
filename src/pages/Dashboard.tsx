@@ -4,14 +4,16 @@ import { useAuth } from "@/contexts/AuthContext";
 import { ContactSubmissions } from "@/components/dashboard/ContactSubmissions";
 import { FileUpload } from "@/components/dashboard/FileUpload";
 import { OnboardingForm } from "@/components/dashboard/OnboardingForm";
+import { ChatPanel } from "@/components/chat/ChatPanel";
 import { Button } from "@/components/ui/button";
 
-type Tab = "submissions" | "files" | "onboarding";
+type Tab = "submissions" | "files" | "onboarding" | "ai";
 
 const tabs: { id: Tab; label: string }[] = [
   { id: "submissions", label: "Contact Submissions" },
   { id: "files", label: "Documents" },
   { id: "onboarding", label: "Onboarding" },
+  { id: "ai", label: "AI Assistant" },
 ];
 
 const Dashboard = () => {
@@ -79,6 +81,7 @@ const Dashboard = () => {
           {active === "submissions" && <ContactSubmissions />}
           {active === "files" && <FileUpload />}
           {active === "onboarding" && <OnboardingForm />}
+          {active === "ai" && <ChatPanel />}
         </div>
       </div>
     </div>

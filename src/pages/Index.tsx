@@ -9,6 +9,7 @@ import { HowItWorks } from "@/components/landing/HowItWorks";
 import { Walkthroughs } from "@/components/landing/Walkthroughs";
 import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 
 const Index = () => {
   return (
@@ -24,6 +25,7 @@ const Index = () => {
       <Walkthroughs />
       <CTA />
       <Footer />
+      <ChatWidget />
     </main>
   );
 };
