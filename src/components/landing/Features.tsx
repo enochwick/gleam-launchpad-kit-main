@@ -47,7 +47,7 @@ export const Features = () => (
             <span className="text-foreground/40">Your process for treating them shouldn't be</span>
           </>
         }
-        description="Healthview 360™ streamlines benefits verification, order management, invoice management, and skin substitute inventory management in one modern workflow."
+        description="One platform streamlines benefits verification, order management, invoice management, and skin substitute inventory in a single modern workflow."
       />
 
       <div className="grid lg:grid-cols-6 gap-4">

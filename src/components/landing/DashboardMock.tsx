@@ -28,17 +28,17 @@ export const DashboardMock = () => {
   return (
     <div className="relative max-w-6xl mx-auto">
       <div className="absolute -inset-x-10 -inset-y-10 rounded-[2rem] pointer-events-none"
-           style={{ background: "radial-gradient(closest-side, hsl(188 95% 40% / 0.18), transparent 70%)" }} />
+           style={{ background: "radial-gradient(closest-side, hsl(38 90% 45% / 0.15), transparent 70%)" }} />
       <div className="relative card-glow rounded-2xl overflow-hidden ring-glow">
         {/* Window chrome */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-[hsl(200_55%_5%)]">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-[hsl(20_8%_6%)]">
           <div className="flex items-center gap-2">
             <span className="h-3 w-3 rounded-full bg-[hsl(0_70%_55%)]" />
             <span className="h-3 w-3 rounded-full bg-[hsl(38_92%_55%)]" />
             <span className="h-3 w-3 rounded-full bg-[hsl(140_60%_50%)]" />
           </div>
           <div className="text-xs font-mono text-foreground/60">
-            Healthview 360™ — Wound Care Dashboard
+            Platform — Wound Care Dashboard
           </div>
           <div className="flex items-center gap-1.5 text-xs text-[hsl(var(--success))]">
             <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--success))] animate-pulse" />
@@ -48,14 +48,14 @@ export const DashboardMock = () => {
 
         <div className="grid md:grid-cols-2 gap-px bg-border">
           {/* Left column */}
-          <div className="bg-[hsl(200_55%_5%)] p-6 space-y-6">
+          <div className="bg-[hsl(20_8%_6%)] p-6 space-y-6">
             <div>
               <h3 className="font-mono text-[10px] uppercase tracking-wider text-foreground/50 mb-3 text-center">
                 BV Status Queue
               </h3>
               <div className="space-y-2">
                 {queue.map((q) => (
-                  <div key={q.name} className="flex items-center justify-between p-3 rounded-lg border border-border/60 bg-[hsl(200_50%_7%)]">
+                  <div key={q.name} className="flex items-center justify-between p-3 rounded-lg border border-border/60 bg-[hsl(22_10%_8%)]">
                     <div>
                       <div className="text-sm font-medium">{q.name}</div>
                       <div className="text-xs text-foreground/50">{q.meta}</div>
@@ -72,7 +72,7 @@ export const DashboardMock = () => {
               <h3 className="font-mono text-[10px] uppercase tracking-wider text-foreground/50 mb-3 text-center">
                 Weekly Orders
               </h3>
-              <div className="rounded-lg border border-border/60 bg-[hsl(200_50%_7%)] p-4">
+              <div className="rounded-lg border border-border/60 bg-[hsl(22_10%_8%)] p-4">
                 <div className="flex items-end justify-between h-24 gap-2">
                   {bars.map((h, i) => (
                     <div key={i} className="flex-1 flex flex-col items-center gap-2">
@@ -88,13 +88,13 @@ export const DashboardMock = () => {
           </div>
 
           {/* Right column */}
-          <div className="bg-[hsl(200_55%_5%)] p-6">
+          <div className="bg-[hsl(20_8%_6%)] p-6">
             <h3 className="font-mono text-[10px] uppercase tracking-wider text-foreground/50 mb-3 text-center">
               Today's Overview
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {overview.map((o) => (
-                <div key={o.label} className="rounded-lg border border-border/60 bg-[hsl(200_50%_7%)] p-5 text-center">
+                <div key={o.label} className="rounded-lg border border-border/60 bg-[hsl(22_10%_8%)] p-5 text-center">
                   <div className="font-mono text-[10px] uppercase tracking-wider text-foreground/50">{o.label}</div>
                   <div className="font-display text-4xl my-2">{o.value}</div>
                   <div className={`text-xs ${o.tone === 'success' ? 'text-[hsl(var(--success))]' : o.tone === 'warning' ? 'text-[hsl(var(--warning))]' : 'text-foreground/60'}`}>

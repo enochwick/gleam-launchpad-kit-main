@@ -1,73 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Healthview 360 inspired — dark navy with teal/cyan glow */
+/* Warm editorial authority — aged parchment meets clinical precision */
 
 @layer base {
   :root {
-    /* Force dark by default — landing is dark */
-    --background: 200 60% 4%;
-    --foreground: 180 20% 96%;
+    --background: 20 8% 5%;
+    --foreground: 40 22% 94%;
 
-    --card: 200 50% 6%;
-    --card-foreground: 180 20% 96%;
+    --card: 20 10% 7%;
+    --card-foreground: 40 22% 94%;
 
-    --popover: 200 50% 6%;
-    --popover-foreground: 180 20% 96%;
+    --popover: 20 10% 7%;
+    --popover-foreground: 40 22% 94%;
 
-    --primary: 188 95% 50%;
-    --primary-foreground: 200 60% 4%;
+    --primary: 38 90% 58%;
+    --primary-foreground: 20 8% 5%;
 
-    --secondary: 200 40% 10%;
-    --secondary-foreground: 180 20% 96%;
+    --secondary: 22 12% 10%;
+    --secondary-foreground: 40 22% 94%;
 
-    --muted: 200 30% 12%;
-    --muted-foreground: 195 15% 65%;
+    --muted: 22 10% 12%;
+    --muted-foreground: 30 8% 55%;
 
-    --accent: 188 95% 45%;
-    --accent-foreground: 200 60% 4%;
+    --accent: 38 85% 52%;
+    --accent-foreground: 20 8% 5%;
 
     --destructive: 0 70% 50%;
-    --destructive-foreground: 180 20% 96%;
+    --destructive-foreground: 40 22% 94%;
 
-    --teal: 180 90% 45%;
-    --cyan: 188 95% 55%;
-    --blue: 210 100% 55%;
+    --teal: 160 65% 48%;
+    --cyan: 175 70% 50%;
+    --blue: 210 90% 55%;
     --warning: 38 92% 55%;
-    --success: 160 70% 45%;
+    --success: 145 65% 42%;
 
-    --border: 195 30% 18%;
-    --border-solid: 195 30% 18%;
-    --input: 195 30% 18%;
-    --ring: 188 95% 50%;
+    --border: 25 14% 14%;
+    --border-solid: 25 14% 14%;
+    --input: 25 14% 14%;
+    --ring: 38 90% 58%;
 
     --radius: 0.75rem;
 
-    --gradient-hero: radial-gradient(ellipse 80% 60% at 50% 40%, hsl(188 95% 25% / 0.35), transparent 60%),
-                     radial-gradient(ellipse 60% 50% at 20% 80%, hsl(160 70% 25% / 0.25), transparent 70%),
-                     radial-gradient(ellipse 70% 50% at 85% 20%, hsl(210 100% 25% / 0.20), transparent 70%);
-    --gradient-text: linear-gradient(180deg, hsl(188 95% 60%), hsl(210 100% 55%));
-    --gradient-button: linear-gradient(135deg, hsl(210 100% 55%), hsl(188 95% 45%));
-    --shadow-glow: 0 0 60px hsl(188 95% 50% / 0.35);
-    --shadow-card: 0 20px 60px -20px hsl(200 80% 2% / 0.8);
+    --gradient-hero:
+      radial-gradient(ellipse 80% 55% at 50% 35%, hsl(38 90% 55% / 0.10), transparent 60%),
+      radial-gradient(ellipse 55% 40% at 15% 75%, hsl(22 55% 30% / 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 45% at 85% 20%, hsl(38 70% 40% / 0.07), transparent 65%);
+    --gradient-text: linear-gradient(135deg, hsl(38 95% 70%), hsl(45 100% 78%));
+    --gradient-button: linear-gradient(135deg, hsl(38 90% 60%), hsl(30 88% 48%));
+    --shadow-glow: 0 0 60px hsl(38 90% 55% / 0.28);
+    --shadow-card: 0 20px 60px -20px hsl(15 30% 2% / 0.85);
 
-    --sidebar-background: 200 50% 6%;
-    --sidebar-foreground: 180 20% 96%;
-    --sidebar-primary: 188 95% 50%;
-    --sidebar-primary-foreground: 200 60% 4%;
-    --sidebar-accent: 200 40% 10%;
-    --sidebar-accent-foreground: 180 20% 96%;
-    --sidebar-border: 195 30% 18%;
-    --sidebar-ring: 188 95% 50%;
+    --sidebar-background: 20 10% 7%;
+    --sidebar-foreground: 40 22% 94%;
+    --sidebar-primary: 38 90% 58%;
+    --sidebar-primary-foreground: 20 8% 5%;
+    --sidebar-accent: 22 12% 10%;
+    --sidebar-accent-foreground: 40 22% 94%;
+    --sidebar-border: 25 14% 14%;
+    --sidebar-ring: 38 90% 58%;
   }
 
   .dark {
-    /* Same — site is always dark */
-    --background: 200 60% 4%;
-    --foreground: 180 20% 96%;
+    --background: 20 8% 5%;
+    --foreground: 40 22% 94%;
   }
 }
 
@@ -88,12 +87,12 @@
 
 @layer utilities {
   .font-display {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.02;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
   }
-  .font-mono { font-family: 'JetBrains Mono', monospace; }
+  .font-mono { font-family: 'IBM Plex Mono', monospace; }
 
   .text-gradient {
     background: var(--gradient-text);
@@ -104,24 +103,24 @@
 
   .btn-gradient {
     background: var(--gradient-button);
-    box-shadow: 0 8px 30px -8px hsl(188 95% 45% / 0.5), inset 0 1px 0 hsl(180 100% 80% / 0.25);
+    box-shadow: 0 8px 30px -8px hsl(38 90% 55% / 0.45), inset 0 1px 0 hsl(45 100% 80% / 0.25);
   }
-  .btn-gradient:hover { filter: brightness(1.1); }
+  .btn-gradient:hover { filter: brightness(1.08); }
 
   .glass {
-    background: hsl(200 50% 8% / 0.6);
-    backdrop-filter: blur(14px);
-    border: 1px solid hsl(195 30% 22% / 0.6);
+    background: hsl(22 10% 8% / 0.65);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(28 18% 18% / 0.7);
   }
 
   .card-glow {
-    background: linear-gradient(180deg, hsl(200 50% 8% / 0.7), hsl(200 60% 5% / 0.7));
-    border: 1px solid hsl(195 30% 18%);
+    background: linear-gradient(160deg, hsl(22 10% 8% / 0.85), hsl(20 8% 5% / 0.85));
+    border: 1px solid hsl(25 14% 13%);
     box-shadow: var(--shadow-card);
   }
 
   .dot-bg {
-    background-image: radial-gradient(hsl(188 95% 45% / 0.08) 1px, transparent 1px);
+    background-image: radial-gradient(hsl(38 90% 55% / 0.07) 1px, transparent 1px);
     background-size: 28px 28px;
   }
 
@@ -133,16 +132,16 @@
 
   .pill-eyebrow {
     @apply inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-mono uppercase tracking-wider;
-    color: hsl(188 95% 70%);
-    border: 1px solid hsl(188 95% 45% / 0.4);
-    background: hsl(188 95% 20% / 0.15);
+    color: hsl(38 90% 72%);
+    border: 1px solid hsl(38 85% 55% / 0.35);
+    background: hsl(38 80% 45% / 0.10);
   }
   .pill-eyebrow::before {
     content: "";
     width: 6px; height: 6px; border-radius: 9999px;
-    background: hsl(188 95% 55%);
-    box-shadow: 0 0 10px hsl(188 95% 55%);
+    background: hsl(38 95% 62%);
+    box-shadow: 0 0 10px hsl(38 95% 62%);
   }
 
-  .ring-glow { box-shadow: 0 0 0 1px hsl(188 95% 45% / 0.25), 0 0 40px hsl(188 95% 45% / 0.15); }
+  .ring-glow { box-shadow: 0 0 0 1px hsl(38 90% 55% / 0.22), 0 0 40px hsl(38 90% 55% / 0.12); }
 }
